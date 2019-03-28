@@ -1,0 +1,32 @@
+--- bfd/elflink.c	2013-11-14 22:32:18.000000000 +0200
++++ bfd/elflink.c	2019-03-27 13:10:38.000000000 +0200
+@@ -4925,7 +4925,7 @@
+   len = strlen (name);
+   copy = (char *) bfd_alloc (abfd, len);
+   if (copy == NULL)
+-    return (struct elf_link_hash_entry *) 0 - 1;
++    return (struct elf_link_hash_entry *) -1;
+ 
+   first = p - name + 1;
+   memcpy (copy, name, first);
+@@ -5037,7 +5037,7 @@
+ 	    }
+ 
+ 	  h = archive_symbol_lookup (abfd, info, symdef->name);
+-	  if (h == (struct elf_link_hash_entry *) 0 - 1)
++	  if (h == (struct elf_link_hash_entry *) -1)
+ 	    goto error_return;
+ 
+ 	  if (h == NULL)
+
+--- bfd/elf64-ppc.c	2013-11-14 22:32:18.000000000 +0200
++++ bfd/elf64-ppc.c	2019-03-27 13:13:19.000000000 +0200
+@@ -4637,7 +4637,7 @@
+   len = strlen (name);
+   dot_name = bfd_alloc (abfd, len + 2);
+   if (dot_name == NULL)
+-    return (struct elf_link_hash_entry *) 0 - 1;
++    return (struct elf_link_hash_entry *) -1;
+   dot_name[0] = '.';
+   memcpy (dot_name + 1, name, len + 1);
+   h = _bfd_elf_archive_symbol_lookup (abfd, info, dot_name);

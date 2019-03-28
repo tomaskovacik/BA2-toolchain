@@ -1,0 +1,63 @@
+--- bfd/ba-isa-ba2.c	2014-04-04 10:22:08.000000000 +0300
++++ bfd/ba-isa-ba2.c	2019-03-27 11:11:11.000000000 +0200
+@@ -93,20 +93,20 @@
+ 
+ #ifdef HAS_EXECUTION
+ # if COMPLEX_EXECUTION
+-#  define EFN { function_name: "l_none" }
+-#  define EFI { function_name: "l_invalid" }
++#  define EFN { .function_name = "l_none" }
++#  define EFI { .function_name = "l_invalid" }
+ #  ifdef __GNUC__
+-#   define EF(func) { function_name: #func }
++#   define EF(func) { .function_name = #func }
+ #  else
+-#   define EF(func) { function_name: "func" }
++#   define EF(func) { .function_name = "func" }
+ #  endif
+ # else /* DYNAMIC_EXECUTION */
+-#  define EFN { dyn_exec: &l_none }
+-#  define EF(func) { dyn_exec: &(gen_ ##func) }
+-#  define EFI { dyn_exec: &gen_l_invalid }
++#  define EFN { .dyn_exec = &l_none }
++#  define EF(func) { .dyn_exec = &(gen_ ##func) }
++#  define EFI { .dyn_exec = &gen_l_invalid }
+ # endif
+ #else /* HAS_EXECUTION */
+-# define EFN { nothing: NULL }
++# define EFN { .nothing = NULL }
+ # define EF(func) EFN
+ # define EFI EFN
+ #endif /* HAS_EXECUTION */
+
+--- bfd/ba-isa-ba1.c	2014-04-04 10:22:08.000000000 +0300
++++ bfd/ba-isa-ba1.c	2019-03-27 11:49:08.000000000 +0200
+@@ -60,20 +60,20 @@
+ 
+ #ifdef HAS_EXECUTION
+ # if COMPLEX_EXECUTION
+-#  define EFN { function_name: "l_none" }
+-#  define EFI { function_name: "l_invalid" }
++#  define EFN { .function_name = "l_none" }
++#  define EFI { .function_name = "l_invalid" }
+ #  ifdef __GNUC__
+-#   define EF(func) { function_name: #func }
++#   define EF(func) { .function_name = #func }
+ #  else
+-#   define EF(func) { function_name: "func" }
++#   define EF(func) { .function_name = "func" }
+ #  endif
+ # else /* DYNAMIC_EXECUTION */
+-#  define EFN { dyn_exec: &l_none }
+-#  define EF(func) { dyn_exec: &(gen_ ##func) }
+-#  define EFI { dyn_exec: &gen_l_invalid }
++#  define EFN { .dyn_exec = &l_none }
++#  define EF(func) { .dyn_exec = &(gen_ ##func) }
++#  define EFI { .dyn_exec = &gen_l_invalid }
+ # endif
+ #else /* HAS_EXECUTION */
+-# define EFN { nothing: NULL }
++# define EFN { .nothing = NULL }
+ # define EF(func) EFN
+ # define EFI EFN
+ #endif /* HAS_EXECUTION */

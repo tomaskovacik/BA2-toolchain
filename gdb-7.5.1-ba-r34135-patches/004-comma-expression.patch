@@ -1,0 +1,23 @@
+--- bfd/bfd-in.h	2014-04-04 10:22:08.000000000 +0300
++++ bfd/bfd-in.h	2019-03-27 14:56:05.000000000 +0200
+@@ -519,7 +519,7 @@
+ 
+ #define bfd_get_symbol_leading_char(abfd) ((abfd)->xvec->symbol_leading_char)
+ 
+-#define bfd_set_cacheable(abfd,bool) (((abfd)->cacheable = bool), TRUE)
++#define bfd_set_cacheable(abfd,bool) ((abfd)->cacheable = bool)
+ 
+ extern bfd_boolean bfd_cache_close
+   (bfd *abfd);
+
+--- bfd/bfd-in2.h	2014-04-04 10:22:08.000000000 +0300
++++ bfd/bfd-in2.h	2019-03-27 14:56:13.000000000 +0200
+@@ -526,7 +526,7 @@
+ 
+ #define bfd_get_symbol_leading_char(abfd) ((abfd)->xvec->symbol_leading_char)
+ 
+-#define bfd_set_cacheable(abfd,bool) (((abfd)->cacheable = bool), TRUE)
++#define bfd_set_cacheable(abfd,bool) ((abfd)->cacheable = bool)
+ 
+ extern bfd_boolean bfd_cache_close
+   (bfd *abfd);

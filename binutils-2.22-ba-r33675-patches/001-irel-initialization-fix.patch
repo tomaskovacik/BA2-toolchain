@@ -1,0 +1,20 @@
+--- bfd/elfxx-ba.c	2013-11-14 22:32:18.000000000 +0200
++++ bfd/elfxx-ba.c	2019-03-27 12:32:09.000000000 +0200
+@@ -3030,7 +3030,7 @@
+   struct eh_frame_sec_info *sec_info;
+   struct eh_cie_fde *fde;
+   struct eh_cie_fde *fde_end;
+-  Elf_Internal_Rela *irels, *irel, *irels_end;
++  Elf_Internal_Rela *irels, *irel = NULL, *irels_end;
+   Elf_Internal_Rela **irel_arr, **irel_itt, **irel_last, **irel_end;
+   bfd_byte *contents;
+   bfd_byte *fde_contents, *prev_al_end;
+@@ -3531,7 +3531,7 @@
+ {
+   struct elf_ba_section_data *sd = sec->used_by_bfd;
+   Elf_Internal_Shdr *symtab_hdr;
+-  Elf_Internal_Rela **irel_arr, **irel, **irelend;
++  Elf_Internal_Rela **irel_arr, **irel = NULL, **irelend;
+   Elf_Internal_Rela **last_irel;
+   bfd_byte *contents;
+   Elf_Internal_Sym *isymbuf = NULL;
