@@ -318,7 +318,7 @@ function build_gdb {
     apply_patches "../$GDBNAME-patches"
 
     status "Configuring GDB $GDBVERSION Release $RELEASENO"
-    ./configure $HOST --target=ba-elf --prefix=$PREFIX
+    ./configure $HOST --target=ba-elf --prefix=$PREFIX --with-python
     if [ "$?" -ne "0" ]; then  echo "Configure failed!"; exit 1; fi
 
     status "Building GDB $GDBVERSION Release $RELEASENO"
