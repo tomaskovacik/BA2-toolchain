@@ -1,0 +1,44 @@
+--- bfd/elfxx-ba.c	2019-04-17 16:18:03.091268554 +0300
++++ bfd/elfxx-ba.c	2019-04-17 16:28:10.234763368 +0300
+@@ -1478,8 +1478,8 @@
+       struct elf_link_hash_entry *h;
+ 
+       /* Force a PT_GNU_STACK segment to be created.  */
+-      if (! elf_tdata (output_bfd)->stack_flags)
+-        elf_tdata (output_bfd)->stack_flags = PF_R | PF_W | PF_X;
++      if (! elf_stack_flags(output_bfd))
++        elf_stack_flags(output_bfd) = PF_R | PF_W | PF_X;
+ 
+       /* Define __stacksize if it's not defined yet.  */
+       h = elf_link_hash_lookup (elf_hash_table (info), "__stacksize",
+@@ -1693,7 +1693,7 @@
+   if (! info)
+     return TRUE;
+ 
+-  for (p = tdata->phdr, m = tdata->segment_map; m != NULL; m = m->next, p++)
++  for (p = tdata->phdr, m = elf_seg_map(output_bfd); m != NULL; m = m->next, p++)
+     if (m->p_type == PT_GNU_STACK)
+       break;
+ 
+--- gdb/remote-ba.c	2014-04-04 10:22:08.000000000 +0300
++++ gdb/remote-ba.c	2019-04-17 16:51:57.973593532 +0300
+@@ -1171,7 +1171,7 @@
+   status->kind = TARGET_WAITKIND_STOPPED;
+ 
+   /* If we had an error, wait just a while, so user can press another ^C */
+-  if (quit_flag)
++  if (check_quit_flag())
+     usleep(1000000);
+ 
+   tp->pc = ba_read_spr_reg(SPR_NPC);
+--- gdb/ba-tdep.c	2014-04-04 10:22:08.000000000 +0300
++++ gdb/ba-tdep.c	2019-04-17 17:18:52.770608009 +0300
+@@ -496,7 +496,7 @@
+         {
+           if (!tdep->ba_gdb_regdisabled[i])
+             {
+-              frame_register_read (frame, i, (gdb_byte *) &regv);
++              deprecated_frame_register_read (frame, i, (gdb_byte *) &regv); // TODO: use get_frame_register_value instead
+               regv = extract_unsigned_integer ((gdb_byte *) &regv, 4, byte_order);
+               printf_filtered ("  %08x", regv);
+               column++;
