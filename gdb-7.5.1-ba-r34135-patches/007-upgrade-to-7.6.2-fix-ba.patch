@@ -22,6 +22,24 @@
  
 --- gdb/remote-ba.c	2014-04-04 10:22:08.000000000 +0300
 +++ gdb/remote-ba.c	2019-04-17 16:51:57.973593532 +0300
+@@ -434,7 +434,7 @@
+ {
+   int i = 0;
+   int gpr = 0;
+-  struct gdbarch_tdep *tdep = gdbarch_tdep(target_gdbarch);
++  struct gdbarch_tdep *tdep = gdbarch_tdep(target_gdbarch());
+ 
+   for (i=0; i<BA_REGDESCS_SIZE; i++)
+     {
+@@ -456,7 +456,7 @@
+ configure_macregs(int enabled)
+ {
+     int i = 0;
+-    struct gdbarch_tdep *tdep = gdbarch_tdep(target_gdbarch);
++    struct gdbarch_tdep *tdep = gdbarch_tdep(target_gdbarch());
+ 
+     for (i=0; i<BA_REGDESCS_SIZE; i++)
+       {
 @@ -1171,7 +1171,7 @@
    status->kind = TARGET_WAITKIND_STOPPED;
  
@@ -31,6 +49,42 @@
      usleep(1000000);
  
    tp->pc = ba_read_spr_reg(SPR_NPC);
+@@ -2251,7 +2251,7 @@
+ {
+   uint32_t data;
+   uint32_t dcmd_new = ba_create_dcmd(len);
+-  struct gdbarch *current_gdbarch = target_gdbarch;
++  struct gdbarch *current_gdbarch = target_gdbarch ();
+ 
+   assert(len <= 4);
+ 
+@@ -2371,7 +2371,7 @@
+ {
+   uint32_t data;
+   uint32_t dcmd_new = ba_create_dcmd(len);
+-  struct gdbarch *current_gdbarch = target_gdbarch;	//OK?
++  struct gdbarch *current_gdbarch = target_gdbarch ();	//OK?
+ 
+   assert(len <= 4);
+ 
+@@ -2518,7 +2518,7 @@
+                    const gdb_byte *writebuf, ULONGEST offset, LONGEST len)
+ {
+   struct ba_target_priv *tp = ops->to_data;
+-  struct gdbarch *current_gdbarch = target_gdbarch;
++  struct gdbarch *current_gdbarch = target_gdbarch ();
+ 
+   switch(object)
+     {
+@@ -2668,7 +2668,7 @@
+   char *arg = xstrdup(spr_cmd_args);
+   char *end;
+   unsigned int spr = strtoul(arg, &end, 0);
+-  enum bfd_endian byte_order = gdbarch_byte_order (target_gdbarch);
++  enum bfd_endian byte_order = gdbarch_byte_order (target_gdbarch ());
+ 
+   assert_target();
+ 
 --- gdb/ba-tdep.c	2014-04-04 10:22:08.000000000 +0300
 +++ gdb/ba-tdep.c	2019-04-17 17:18:52.770608009 +0300
 @@ -496,7 +496,7 @@
