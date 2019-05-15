@@ -318,7 +318,7 @@ function build_gdb {
     apply_patches "../$GDBNAME-patches"
 
     status "Configuring GDB $GDBVERSION Release $RELEASENO"
-    ./configure $HOST --target=ba-elf --prefix=$PREFIX --with-python
+    ./configure $HOST --target=ba-elf --prefix=$PREFIX --with-python=$(which python3)
     if [ "$?" -ne "0" ]; then  echo "Configure failed!"; exit 1; fi
 
     status "Building GDB $GDBVERSION Release $RELEASENO"
@@ -382,8 +382,8 @@ function build_jtag {
 # Build each component of the toolchain:
 
 build_clean
-build_binutils
-build_gcc
+#build_binutils
+#build_gcc
 build_gdb
 build_jtag
 
