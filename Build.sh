@@ -382,8 +382,8 @@ function build_jtag {
 # Build each component of the toolchain:
 
 build_clean
-#build_binutils
-#build_gcc
+build_binutils
+build_gcc
 build_gdb
 build_jtag
 
