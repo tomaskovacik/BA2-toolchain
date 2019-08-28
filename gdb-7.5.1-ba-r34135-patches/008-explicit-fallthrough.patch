@@ -1,0 +1,39 @@
+--- bfd/coffgen.c	2019-04-17 16:18:03.091268554 +0300
++++ bfd/coffgen.c	2019-04-17 16:28:10.234763368 +0300
+@@ -2112,7 +2112,7 @@
+ 				 auxp->u.auxent.x_scn.x_comdat);
+ 		      break;
+ 		    }
+-		    /* Otherwise fall through.  */
++		    /* Else fall through.  */
+ 		case C_EXT:
+ 		case C_AIX_WEAKEXT:
+ 		  if (ISFCN (combined->u.syment.n_type))
+@@ -2132,7 +2132,7 @@
+ 			       llnos, next);
+ 		      break;
+ 		    }
+-		  /* Otherwise fall through.  */
++		  /* Else fall through.  */
+ 		default:
+ 		  fprintf (file, "AUX lnno %d size 0x%x tagndx %ld",
+ 			   auxp->u.auxent.x_sym.x_misc.x_lnsz.x_lnno,
+--- bfd/reloc.c		2019-04-17 16:18:03.091268554 +0300
++++ bfd/reloc.c		2019-04-17 16:28:10.234763368 +0300
+@@ -7339,13 +7339,16 @@
+ 	{
+ 	case 64:
+ 	  BFD_FAIL ();
++	  break;
+ 	case 32:
+ 	  return &bfd_howto_32;
+ 	case 16:
+ 	  BFD_FAIL ();
++	  break;
+ 	default:
+ 	  BFD_FAIL ();
+ 	}
++      break;
+     default:
+       BFD_FAIL ();
+     }
