@@ -27,6 +27,7 @@
 +    { 0x0403, 0xac09, "Atomic", NULL, l_amontec_jtagkey, 0 },                             // Atomic programming AP-114 (same layout as Amontec)
 +    { 0x0403, 0x8220, "DISTORTEC", "JTAG-lock-pick Tiny 2", l_lockpick2, 1 },             // JTAG-lock-pick Tiny 2
 +    { 0x0403, 0x8a98, "TIAO", "TIAO USB Multi-Protocol Adapter", l_amontec_jtagkey2, 0 }, // TIAO Tumpa
++    { 0x0403, 0x6014, NULL, NULL, l_amontec_jtagkey2, 0 },             			  // generic FT232H board
      { 0, 0 }
  };
- 
+
