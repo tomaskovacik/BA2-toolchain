@@ -1,6 +1,6 @@
 --- ftdi_driver.c	2019-04-17 17:35:21.064316026 +0300
 +++ ftdi_driver.c	2019-04-17 17:38:22.224515619 +0300
-@@ -77,17 +77,18 @@
+@@ -77,17 +77,19 @@
  
  /* vendor, product, name pairs of supported devices */
  struct ftdi_device_desc supported_devs[] = {
